@@ -1,0 +1,13 @@
+{
+    "app_name": "CyberShield Việt Nam",
+    "version": "1.0.0",
+    "slogan": "Bảo vệ người dùng trước các nguy cơ lừa đảo trực tuyến",
+    "theme": "dark",
+    "font_size": 12,
+    "language": "vi",
+    "sidebar_title": "CyberShield",
+    "api_url": "https://api.cybershield.vn/v1",
+    "theme": "dark",
+    "enable_auto_update": true,
+    "max_history_records": 100
+}
