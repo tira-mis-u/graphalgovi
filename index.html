@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graphalgovi — Real-World Graph Algorithms</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='5' cy='11' r='3' fill='%23e89e3b'/%3E%3Ccircle cx='11' cy='5' r='3' fill='%234a7c59'/%3E%3Cline x1='7' y1='9' x2='9' y2='7' stroke='%235b7fb0' stroke-width='1.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <button class="brand" id="brandHome" aria-label="Go to home">
+        <span class="logo" aria-hidden="true">
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <circle cx="8" cy="22" r="4" fill="#e89e3b"/><circle cx="22" cy="8" r="4" fill="#4a7c59"/><circle cx="22" cy="22" r="4" fill="#5b7fb0"/>
+            <line x1="11" y1="20" x2="19" y2="10" stroke="#3a4256" stroke-width="1.6"/><line x1="11" y1="22" x2="19" y2="22" stroke="#3a4256" stroke-width="1.6"/>
+          </svg>
+        </span>
+        <span class="brand-title">Graphalgovi</span>
+      </button>
+
+      <div id="headerCenter">
+        <div class="seg-tabs" id="segTabs" role="tablist" aria-label="Catalog">
+          <button class="seg-tab active" data-tab="problems"><i class="fa-solid fa-briefcase"></i>Problems</button>
+          <button class="seg-tab" data-tab="algorithms"><i class="fa-solid fa-diagram-project"></i>Algorithms</button>
+        </div>
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass search-ico" aria-hidden="true"></i>
+          <input id="searchInput" type="search" placeholder="Search problems & algorithms…" autocomplete="off" aria-label="Search" />
+        </div>
+      </div>
+
+      <div class="top-right">
+        <a class="contact-link yt" href="https://www.youtube.com/@tirumisaa" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="contact-link dc" href="https://discord.gg/WrHnJTBEfR" target="_blank" rel="noopener" aria-label="Discord" title="Discord"><i class="fa-brands fa-discord"></i></a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme" title="Toggle light / dark theme"><i class="fa-solid fa-sun"></i></button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============================ CATALOG (default) ============================ -->
+      <section id="view-home" class="view">
+        <div class="filter-bar" id="filterBar"></div>
+        <div class="problem-grid" id="problemGrid"></div>
+      </section>
+
+      <!-- ============================ WORKSPACE ============================ -->
+      <section id="view-workspace" class="view" hidden>
+        <div id="ws">
+          <div id="wsHeader">
+            <button id="btnWsBack" class="btn btn-ghost" aria-label="Back"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="ws-title">
+              <h1 id="wsProblemHeading">—</h1>
+              <div class="ws-subline">
+                <span id="wsScenarioTitle" class="ws-scenario">—</span>
+                <span id="wsDataLabel" class="badge"></span>
+              </div>
+            </div>
+            <div class="ws-algos" id="wsAlgoChips" aria-label="Available algorithms"></div>
+            <label class="level-select" id="levelSelectWrap" hidden>
+              <span class="level-label">COMPLEXITY</span>
+              <select id="levelSelect" aria-label="Scenario complexity"></select>
+            </label>
+          </div>
+
+          <div id="wsBody">
+            <div id="canvasWrap">
+              <canvas id="graphCanvas" role="img" aria-label="Visualization"></canvas>
+
+              <div class="overlay overlay-tr view-controls">
+                <button id="btnZoomIn" class="btn btn-ico" title="Zoom in" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
+                <button id="btnZoomOut" class="btn btn-ico" title="Zoom out" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
+                <button id="btnFit" class="btn btn-ico" title="Fit to view" aria-label="Fit to view"><i class="fa-solid fa-expand"></i></button>
+              </div>
+
+              <div class="overlay overlay-tl ctx-bar" id="ctxBar"></div>
+
+              <div class="overlay overlay-br">
+                <button id="btnReveal" class="btn btn-soft"><i class="fa-solid fa-eye"></i> REVEAL GRAPH</button>
+              </div>
+
+              <div class="overlay reveal-legend" id="revealLegend" hidden></div>
+              <div class="overlay onboarding" id="onboarding" hidden>
+                <div class="onb-card">
+                  <div class="onb-title" id="onbTitle"></div>
+                  <ol class="onb-steps" id="onbSteps"></ol>
+                  <button class="btn btn-primary" id="onbDismiss">Got it</button>
+                </div>
+              </div>
+            </div>
+
+            <aside id="wsSide">
+              <section class="panel" id="wsWhatNow">
+                <header class="panel-title">WHAT IS HAPPENING NOW?</header>
+                <div class="panel-body" id="whatNow"></div>
+              </section>
+              <section class="panel" id="wsMetrics">
+                <header class="panel-title" id="metricsTitle">METRICS</header>
+                <div class="panel-body" id="metrics"></div>
+              </section>
+              <section class="panel" id="wsWhyGraph">
+                <header class="panel-title">WHY IS THIS A GRAPH?</header>
+                <div class="panel-body" id="whyGraph"></div>
+              </section>
+              <section class="panel" id="wsResult">
+                <header class="panel-title">RESULT</header>
+                <div class="panel-body" id="resultText"></div>
+              </section>
+              <section class="panel" id="wsCompare">
+                <header class="panel-title">COMPARE ON THIS PROBLEM</header>
+                <div class="panel-body">
+                  <div class="compare-controls">
+                    <select id="compareA" class="select-inline" aria-label="Algorithm A"></select>
+                    <span class="muted-text">vs</span>
+                    <select id="compareB" class="select-inline" aria-label="Algorithm B"></select>
+                    <button id="btnCompareDo" class="btn btn-soft btn-small"><i class="fa-solid fa-play"></i></button>
+                  </div>
+                  <div id="compareResult" class="compare-results"></div>
+                </div>
+              </section>
+              <section class="panel" id="wsInternals">
+                <header class="panel-title">ALGORITHM INTERNALS</header>
+                <div class="panel-body">
+                  <div id="machineryBox"></div>
+                  <div id="levelsBox"></div>
+                </div>
+              </section>
+              <section class="panel" id="wsPseudocode">
+                <header class="panel-title">PSEUDOCODE</header>
+                <div class="panel-body"><pre class="pseudocode" id="pseudocode"></pre></div>
+              </section>
+              <section class="panel" id="wsTrace">
+                <header class="panel-title">EXECUTION TRACE</header>
+                <div class="panel-body" id="tracePanel"></div>
+              </section>
+            </aside>
+          </div>
+
+          <div id="wsControls">
+            <button id="btnRun" class="btn btn-primary btn-ico btn-lg" title="Start / pause" aria-label="Start or pause"><i class="fa-solid fa-play"></i></button>
+            <button id="btnStepBack" class="btn btn-ico" title="Step back" aria-label="Step back"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="step-edit">
+              <input type="number" id="stepInput" min="0" max="0" step="1" value="0" aria-label="Current step" />
+              <span class="step-sep">/</span>
+              <span class="mono" id="stepMax">0</span>
+            </div>
+            <button id="btnStep" class="btn btn-ico" title="Step forward" aria-label="Step forward"><i class="fa-solid fa-chevron-right"></i></button>
+            <label class="speed-edit" title="Playback speed (0.5× – 6×)">
+              <span class="speed-x">×</span>
+              <input type="number" id="speedInput" min="0.5" max="6" step="0.1" value="1.75" aria-label="Playback speed" />
+            </label>
+            <span class="ws-status mono" id="activityLine">READY</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- modals -->
+  <div class="modal" id="generateModal" hidden role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head"><h2>Generate Graph</h2><button class="btn btn-soft modal-close" data-close="generateModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="gen-form">
+        <label>TYPE
+          <select id="genType"><option value="random">Random</option><option value="grid">Grid</option><option value="tree">Tree</option><option value="dag">DAG</option></select>
+        </label>
+        <label>NODES <input type="number" id="genN" value="8" min="2" max="30" /></label>
+        <label>DENSITY <input type="range" id="genDensity" min="0.1" max="1" step="0.05" value="0.25" /><span class="mono" id="genDensityVal">0.25</span></label>
+        <label class="toggle-label"><input type="checkbox" id="genWeighted" /> WEIGHTED</label>
+        <label class="toggle-label"><input type="checkbox" id="genDirected" /> DIRECTED</label>
+        <label>WEIGHT 1–<input type="number" id="genWMax" value="9" min="2" max="99" /></label>
+        <label>SEED <input type="number" id="genSeed" value="12345" /></label>
+      </div>
+      <div class="modal-foot"><button id="btnGenDo" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> GENERATE → LAB</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="benchmarkModal" hidden role="dialog" aria-modal="true">
+    <div class="modal-card wide">
+      <div class="modal-head"><h2>Benchmark — same seed, growing graphs</h2><button class="btn btn-soft modal-close" data-close="benchmarkModal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="gen-form">
+        <label>ALGORITHM <select id="benchAlgo"></select></label>
+        <label>MAX NODES <input type="number" id="benchMaxN" value="18" min="4" max="26" /></label>
+        <label>SEED <input type="number" id="benchSeed" value="12345" /></label>
+        <button id="btnBenchDo" class="btn btn-primary"><i class="fa-solid fa-play"></i> RUN</button>
+      </div>
+      <div class="bench-note muted-text">Measures real execution events and wall time. Focus on how STEPS grow with n.</div>
+      <div id="benchResult" class="bench-table"></div>
+    </div>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" hidden />
+
+  <div id="errorPanel" hidden>
+    <div class="error-card">
+      <h2>INITIALIZATION ERROR</h2>
+      <div class="error-stage"><span>Stage:</span><span id="errorStage">—</span></div>
+      <div class="error-stage"><span>Error:</span><span id="errorMsg">—</span></div>
+      <pre id="errorStack"></pre>
+    </div>
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
