@@ -1,4 +1,4 @@
-import { TraceBuilder, fmt } from './_common.js';
+import { TraceBuilder, fmt } from './common.js';
 
 /**
  * Maximum Flow — Ford-Fulkerson (DFS augmenting paths) and Edmonds-Karp

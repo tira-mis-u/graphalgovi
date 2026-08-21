@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Articulation Points — vertices whose removal increases the number of

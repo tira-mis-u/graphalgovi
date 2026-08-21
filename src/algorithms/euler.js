@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Euler Path / Circuit — visit every EDGE exactly once (Hierholzer's algorithm).

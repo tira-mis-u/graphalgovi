@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Connected Components — BFS over every unvisited node to enumerate the

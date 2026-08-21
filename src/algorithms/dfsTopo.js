@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * DFS-based Topological Sort — post-order DFS; the reversed finish order is a

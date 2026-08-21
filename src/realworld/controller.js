@@ -2,7 +2,7 @@
  * Real-World controller helpers — bridge between the execution trace and the
  * domain layer. Pure functions, no DOM.
  */
-import { fmt } from '../algorithms/_common.js';
+import { fmt } from '../algorithms/common.js';
 
 /**
  * Normalize any execution state into the UNIVERSAL snapshot shape

@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Kahn's Algorithm — topological order via in-degree elimination.

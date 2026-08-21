@@ -1,4 +1,4 @@
-import { TraceBuilder, fmt } from './_common.js';
+import { TraceBuilder, fmt } from './common.js';
 
 /**
  * Prim — Minimum Spanning Tree grown from a start vertex.

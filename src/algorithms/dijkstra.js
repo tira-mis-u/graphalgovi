@@ -1,4 +1,4 @@
-import { TraceBuilder, fmt } from './_common.js';
+import { TraceBuilder, fmt } from './common.js';
 
 /**
  * Dijkstra — single-source shortest paths with non-negative weights.

@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Cycle Detection — detects a cycle and shows the exact edge that creates it.

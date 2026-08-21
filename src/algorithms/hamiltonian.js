@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Hamiltonian Path / Cycle — visit every VERTEX exactly once.

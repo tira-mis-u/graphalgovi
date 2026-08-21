@@ -1,4 +1,4 @@
-import { TraceBuilder, fmt } from './_common.js';
+import { TraceBuilder, fmt } from './common.js';
 
 /**
  * Kruskal — Minimum Spanning Tree using DSU / Union-Find.

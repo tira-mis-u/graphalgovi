@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Kosaraju's Algorithm — Strongly Connected Components in two DFS passes:

@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * DSU / Union-Find — a dedicated visualization of the disjoint-set structure

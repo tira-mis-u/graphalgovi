@@ -1,4 +1,4 @@
-import { TraceBuilder } from './_common.js';
+import { TraceBuilder } from './common.js';
 
 /**
  * Tarjan's SCC — single DFS pass using discovery index and low-link values.

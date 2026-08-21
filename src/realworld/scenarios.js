@@ -15,7 +15,7 @@
  * presentation/adapter layer over the execution trace.
  */
 import Graph from '../graph/Graph.js';
-import { fmt } from '../algorithms/_common.js';
+import { fmt } from '../algorithms/common.js';
 
 const DATA_LABELS = {
   'realistic-simulation': 'Realistic simulation',

@@ -3,7 +3,7 @@
  * algorithms (everything except legacy BFS/DFS, which use InternalStateRenderer).
  * Every value shown comes from the real execution snapshot.
  */
-import { fmt } from '../algorithms/_common.js';
+import { fmt } from '../algorithms/common.js';
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({
